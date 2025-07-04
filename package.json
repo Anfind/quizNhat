@@ -1,0 +1,17 @@
+{
+  "name": "quiz-nhat-learning-platform",
+  "version": "1.0.0",
+  "description": "Hệ thống học trực tuyến với ReactJS, Node.js và MySQL",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "keywords": ["react", "nodejs", "mysql", "learning-platform", "quiz"],
+  "author": "Quiz Nhat Team",
+  "license": "MIT"
+}
