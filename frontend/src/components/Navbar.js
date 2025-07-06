@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import styled from 'styled-components';
-import { FaHome, FaUser, FaChartLine, FaSignOutAlt, FaGraduationCap, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaUser, FaChartLine, FaSignOutAlt, FaGraduationCap, FaBars, FaTimes, FaCog } from 'react-icons/fa';
 
 const NavbarContainer = styled.nav`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -258,6 +258,13 @@ const Navbar = () => {
               <FaUser />
               Hồ sơ
             </NavLink>
+            
+            {user.role === 'admin' && (
+              <NavLink to="/admin" onClick={handleLinkClick}>
+                <FaCog />
+                Quản trị
+              </NavLink>
+            )}
             
             <UserInfo>
               Xin chào, {user.full_name || user.username}!

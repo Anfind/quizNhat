@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Configure axios base URL
+axios.defaults.baseURL = 'http://localhost:5000';
+
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -20,7 +23,10 @@ export const AuthProvider = ({ children }) => {
     const userData = localStorage.getItem('user');
     
     if (token && userData) {
-      setUser(JSON.parse(userData));
+      const parsedUser = JSON.parse(userData);
+      // Add role based on username for simplicity
+      parsedUser.role = parsedUser.username === 'admin' ? 'admin' : 'user';
+      setUser(parsedUser);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
     
@@ -35,6 +41,9 @@ export const AuthProvider = ({ children }) => {
       });
       
       const { token, user } = response.data;
+      
+      // Add role based on username for simplicity
+      user.role = user.username === 'admin' ? 'admin' : 'user';
       
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
